@@ -41,23 +41,17 @@ locale-gen;
 echo KEYMAP=de-latin1 > /etc/vconsole.conf;
 echo FONT=lat9w-16 >> /etc/vconsole.conf;
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime;
-passwd << EOF
-$PASS
-$PASS
-EOF
-useradd -mG wheel -s /bin/bash luca
-passwd luca << EOF
-$PASS
-$PASS
-EOF
+echo "root:$PASS" | chpasswd;
+useradd -mG wheel -s /bin/bash luca;
+echo "luca:$PASS" | chpasswd;
 mkinitcpio -p linux;
 pacman -S --noconfirm grub;
 grub-install --recheck /dev/sda;
 grub-mkconfig -o /boot/grub/grub.cfg;
-echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers;
-pacman -S cinnamon gdm gedit gimp alacritty git wget vim okular vlc vivaldi geeqie flameshot nm-applet
-systemctl enable gdm
-systemctl enable NetworkManager
+#echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers;
+pacman -S --noconfirm cinnamon gdm gedit gimp alacritty git wget vim okular vlc vivaldi geeqie flameshot nm-applet;
+systemctl enable gdm;
+systemctl enable NetworkManager;
 
 EOT
 
