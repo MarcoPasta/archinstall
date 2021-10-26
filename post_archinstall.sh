@@ -28,7 +28,7 @@ grub-install --recheck /dev/sda;
 grub-mkconfig -o /boot/grub/grub.cfg;
 
 # automatically put user into the sudoers file 
-#echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers;
+echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers;
 
 # install additional packages
 pacman -S --noconfirm cinnamon gdm gedit alacritty git wget vim okular vlc geeqie \
