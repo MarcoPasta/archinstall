@@ -33,7 +33,7 @@ echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers;
 # install additional packages
 pacman -S --noconfirm cinnamon gdm gedit alacritty git wget vim okular vlc geeqie \
 flameshot network-manager-applet vivaldi vivaldi-ffmpeg-codecs bluez blueberry \
-chromium pcmanfm thunderbird libreoffice bitwarden xournalpp neofetch redshift\
+chromium pcmanfm thunderbird libreoffice bitwarden xournalpp neofetch redshift \
 intel-ucode
 
 # enable system services on boot 

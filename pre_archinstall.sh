@@ -36,7 +36,7 @@ EOF
 # creating fstab and chroot into new system
 genfstab -U /mnt > /mnt/etc/fstab;
 cp ./post_archinstall.sh /mnt/root/
-arch-chroot /mnt "/bin/bash" "/root/post_archinstall.sh $PASS"
+arch-chroot /mnt /root/post_archinstall.sh $PASS
 
 # nearly done
 umount /mnt
