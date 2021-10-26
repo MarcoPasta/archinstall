@@ -1,4 +1,4 @@
-#!/bin/bashsh
+#!/bin/bash
 
 # Ideen für todo
 # fonts ändern, config .dotfiles kopieren
@@ -35,7 +35,8 @@ EOF
 
 # creating fstab and chroot into new system
 genfstab -U /mnt > /mnt/etc/fstab;
-arch-chroot /mnt /bin/bash /root/archinstall/post_archinstall.sh $PASS
+cp ./post_archinstall.sh /mnt/root/
+arch-chroot /mnt "/bin/bash" "/root/post_archinstall.sh $PASS"
 
 # nearly done
 umount /mnt
