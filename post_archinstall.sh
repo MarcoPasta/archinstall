@@ -34,9 +34,12 @@ echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers;
 pacman -S --noconfirm cinnamon gdm gedit alacritty git wget vim okular vlc geeqie \
 flameshot network-manager-applet vivaldi vivaldi-ffmpeg-codecs bluez blueberry \
 chromium pcmanfm thunderbird libreoffice bitwarden xournalpp neofetch redshift \
-intel-ucode
+intel-ucode ufw
 
 # enable system services on boot 
 systemctl enable gdm;
 systemctl enable NetworkManager;
 systemctl enable bluetooth;
+ufw enable 
+ufw status 
+sleep 4;
