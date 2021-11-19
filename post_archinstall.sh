@@ -26,11 +26,11 @@ mkinitcpio -p linux;
 pacman -S --noconfirm grub;
 
 # install grub for BIOS 
-grub-install --recheck /dev/sda;
+#grub-install --recheck /dev/sda;
 
 # install grub for UEFI
-# mount /dev/sda1 /boot
-# grub-install --target=x86_64-efi --efi-directory=/dev/sda1
+mount /dev/sda1 /boot
+grub-install --target=x86_64-efi --efi-directory=/boot
 
 # make config 
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -39,10 +39,13 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers;
 
 # install additional packages
-pacman -S --noconfirm gedit alacritty kitty git wget vim okular vlc geeqie \
-flameshot vivaldi vivaldi-ffmpeg-codecs firefox bluez blueberry \
-chromium pcmanfm thunderbird libreoffice bitwarden xournalpp neofetch redshift \
-intel-ucode ufw
+#pacman -S --noconfirm gedit alacritty kitty git wget vim okular vlc geeqie \
+#flameshot vivaldi vivaldi-ffmpeg-codecs firefox bluez blueberry \
+#chromium pcmanfm thunderbird libreoffice bitwarden xournalpp neofetch redshift \
+#intel-ucode ufw
+
+# Debug 
+pacman -S --noconfigm cinnamon gdm alacritty firefox networkmanager:w
 
 # enable system services on boot 
 systemctl enable gdm;

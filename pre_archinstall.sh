@@ -10,29 +10,29 @@ sleep 4;
 
 
 # creating T540p partitions with stdin stream
-fdisk /dev/sda << EOF
-o
-n
-p
-
-
-
-a
-
-w
-EOF
+#fdisk /dev/sda << EOF
+#o
+#n
+#p
+#
+#
+#
+#a
+#
+#w
+#EOF
 
 # creating partitions for UEFI
-# sgdisk -Z --new=1:0:+300M --typecode=1:EF02 --new=2:0:0 --typecode=2:8300 /dev/sda
+sgdisk -Z --new=1:0:+300M --typecode=1:EF02 --new=2:0:0 --typecode=2:8300 /dev/sda
 
 # creating ext4 format and mount for BIOS;
-mkfs.ext4 /dev/sda1;
-mount /dev/sda1 /mnt;
+#mkfs.ext4 /dev/sda1;
+#mount /dev/sda1 /mnt;
 
 # creating formats and mount for 2. workstation
-# mkfs.fat -F 32 /dev/sda1
-# mkfs.ext4 /dev/sda2
-# mount /dev/sda2 /mnt
+mkfs.fat -F 32 /dev/sda1
+mkfs.ext4 /dev/sda2
+mount /dev/sda2 /mnt
 
 # install base system;
 pacstrap /mnt base base-devel linux linux-firmware dhcpcd nano networkmanager iwd << EOF
