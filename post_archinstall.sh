@@ -21,18 +21,25 @@ echo "root:$PASS" | chpasswd;
 useradd -mG wheel -s /bin/bash luca;
 echo "luca:$PASS" | chpasswd;
 
-# create init system / kernel & install grub 
+# create init system / kernel & install grub
 mkinitcpio -p linux;
 pacman -S --noconfirm grub;
+
+# install grub for BIOS 
 grub-install --recheck /dev/sda;
-grub-mkconfig -o /boot/grub/grub.cfg;
+
+# install grub for UEFI
+#grub-install --target=x86_64-efi --efi-directory=/dev/sda1
+
+# make config 
+grub-mkconfig -o /boot/grub/grub.cfg
 
 # automatically put user into the sudoers file 
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers;
 
 # install additional packages
-pacman -S --noconfirm cinnamon gdm gedit alacritty git wget vim okular vlc geeqie \
-flameshot network-manager-applet vivaldi vivaldi-ffmpeg-codecs bluez blueberry \
+pacman -S --noconfirm gedit alacritty kitty git wget vim okular vlc geeqie \
+flameshot vivaldi vivaldi-ffmpeg-codecs firefox bluez blueberry \
 chromium pcmanfm thunderbird libreoffice bitwarden xournalpp neofetch redshift \
 intel-ucode ufw
 
@@ -40,6 +47,4 @@ intel-ucode ufw
 systemctl enable gdm;
 systemctl enable NetworkManager;
 systemctl enable bluetooth;
-ufw enable 
-ufw status 
 sleep 4;
