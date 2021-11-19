@@ -29,7 +29,8 @@ pacman -S --noconfirm grub;
 grub-install --recheck /dev/sda;
 
 # install grub for UEFI
-#grub-install --target=x86_64-efi --efi-directory=/dev/sda1
+# mount /dev/sda1 /boot
+# grub-install --target=x86_64-efi --efi-directory=/dev/sda1
 
 # make config 
 grub-mkconfig -o /boot/grub/grub.cfg
