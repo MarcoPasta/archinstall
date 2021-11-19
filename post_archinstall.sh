@@ -25,12 +25,15 @@ echo "luca:$PASS" | chpasswd;
 mkinitcpio -p linux;
 pacman -S --noconfirm grub;
 
-# install grub for BIOS 
-#grub-install --recheck /dev/sda;
-
-# install grub for UEFI
 mount /dev/sda1 /boot
-grub-install --target=x86_64-efi --efi-directory=/boot
+
+# install grub for BIOS 
+grub-install --recheck /dev/sda;
+sleep 4;
+# install grub for UEFI
+#mount /dev/sda1 /boot
+#grub-install --target=x86_64-efi --efi-directory=/boot
+
 
 # make config 
 grub-mkconfig -o /boot/grub/grub.cfg
