@@ -23,35 +23,39 @@ echo "luca:$PASS" | chpasswd;
 
 # create init system / kernel & install grub
 mkinitcpio -p linux;
-pacman -S --noconfirm grub;
+pacman -S --noconfirm grub efibootmgr;
 
 mount /dev/sda1 /boot
 
 # install grub for BIOS 
-grub-install --recheck /dev/sda;
+# grub-install --recheck /dev/sda;
 sleep 4;
 # install grub for UEFI
-#mount /dev/sda1 /boot
-#grub-install --target=x86_64-efi --efi-directory=/boot
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable;
 
 
 # make config 
-grub-mkconfig -o /boot/grub/grub.cfg
+grub-mkconfig -o /boot/grub/grub.cfg;
 
 # automatically put user into the sudoers file 
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers;
 
-# install additional packages
-#pacman -S --noconfirm gedit alacritty kitty git wget vim okular vlc geeqie \
-#flameshot vivaldi vivaldi-ffmpeg-codecs firefox bluez blueberry \
-#chromium pcmanfm thunderbird libreoffice bitwarden xournalpp neofetch redshift \
-#intel-ucode ufw
+# install additional packages T540p with cinnamon
+pacman -S --noconfirm cinnamon gdm gedit alacritty kitty git wget vim okular vlc geeqie \
+flameshot vivaldi vivaldi-ffmpeg-codecs firefox bluez blueberry \
+chromium pcmanfm thunderbird libreoffice bitwarden xournalpp neofetch redshift \
+intel-ucode ufw
 
-# Debug 
-pacman -S --noconfigm cinnamon gdm alacritty firefox networkmanager:w
+# install for workstation with Plasma
+pacman -S --noconfirm alacritty kitty git wget vim okular vlc geeqie \
+flameshot vivaldi vivaldi-ffmpeg-codecs firefox chromium thunderbird \
+libreoffice bitwarden xournalpp neofetch redshift intel-ucode plasma sddm;
+
+
 
 # enable system services on boot 
-systemctl enable gdm;
+#systemctl enable gdm;     
+systemctl enable sddm;
 systemctl enable NetworkManager;
 systemctl enable bluetooth;
 sleep 4;
