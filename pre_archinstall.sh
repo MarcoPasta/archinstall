@@ -45,9 +45,9 @@ cp ./post_archinstall.sh /mnt/root/
 arch-chroot /mnt /root/post_archinstall.sh $PASS
 
 # nearly done
-umount /mnt
-echo "ready for reboot?"
-sleep 4;
-reboot
+#umount /mnt
+#echo "ready for reboot?"
+#sleep 4;
+#reboot
 
 
