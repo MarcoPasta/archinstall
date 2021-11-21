@@ -23,15 +23,16 @@ echo "luca:$PASS" | chpasswd;
 
 # create init system / kernel & install grub
 mkinitcpio -p linux;
-pacman -S --noconfirm grub efibootmgr;
+pacman -S --noconfirm grub;
+# pacman -S --noconfirm grub efibootmgr;
 
-mkdir -p /boot/efi
+# mkdir -p /boot/efi
 
 # install grub for BIOS 
-# grub-install --recheck /dev/sda;
+grub-install --recheck /dev/sda;
 sleep 4;
 # install grub for UEFI
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable;
+# grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable;
 
 
 # make config 
@@ -56,6 +57,6 @@ echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers;
 # enable system services on boot 
 # systemctl enable gdm;     
 # systemctl enable sddm;
-# systemctl enable NetworkManager;
+systemctl enable NetworkManager;
 # systemctl enable bluetooth;
 sleep 4;
