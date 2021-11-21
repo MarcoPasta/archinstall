@@ -23,7 +23,7 @@ sleep 4;
 #EOF
 
 # creating partitions for UEFI
-sgdisk -Z --new=1:0:+300M --typecode=1:EF02 --new=2:0:0 --typecode=2:8300 /dev/sda
+sgdisk -Z --new=1:0:+300M --typecode=1:EF02 --new=2:0:0 --typecode=2:8300 /dev/sdb
 
 
 # creating ext4 format and mount;
@@ -33,6 +33,9 @@ sgdisk -Z --new=1:0:+300M --typecode=1:EF02 --new=2:0:0 --typecode=2:8300 /dev/s
 # creating fs for UEFI
 mkfs.fat -F 32 /dev/sda1 
 mkfs.ext4 /dev/sda2 
+mount /dev/sdb2 /mnt	
+mount /dev/sdb1 /boot
+
 
 # install base system;
 pacstrap /mnt base base-devel linux linux-firmware dhcpcd nano networkmanager iwd << EOF
@@ -45,9 +48,9 @@ cp ./post_archinstall.sh /mnt/root/
 arch-chroot /mnt /root/post_archinstall.sh $PASS
 
 # nearly done
-#umount /mnt
-#echo "ready for reboot?"
-#sleep 4;
-#reboot
+umount /mnt
+echo "ready for reboot?"
+sleep 4;
+reboot
 
 
