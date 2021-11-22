@@ -10,31 +10,31 @@ sleep 4;
 
 
 # creating partitions with stdin stream
-fdisk /dev/sda << EOF
-o
-n
-p
-
-
-
-a
-
-w
-EOF
+#fdisk /dev/sda << EOF
+#o
+#n
+#p
+#
+#
+#
+#a
+#
+#w
+#EOF
 
 # creating partitions for UEFI
-# sgdisk -Z --new=1:0:+300M --typecode=1:EF02 --new=2:0:0 --typecode=2:8300 /dev/sdb
+sgdisk -Z --new=1:0:+300M --typecode=1:EF00 --new=2:0:0 --typecode=2:8300 /dev/sdb
 
 
 # creating ext4 format and mount;
-mkfs.ext4 /dev/sda1;
-mount /dev/sda1 /mnt;
+#mkfs.ext4 /dev/sda1;
+#mount /dev/sda1 /mnt;
 
 # creating fs for UEFI
-# mkfs.fat -F 32 /dev/sda1 
-# mkfs.ext4 /dev/sda2 
-# mount /dev/sdb2 /mnt	
-# mount /dev/sdb1 /boot
+mkfs.fat -F32 /dev/sdb1 
+mkfs.ext4 /dev/sdb2 
+mount /dev/sdb2 /mnt	
+mount /dev/sdb1 /mnt/boot
 
 
 # install base system;
