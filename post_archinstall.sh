@@ -18,23 +18,18 @@ echo FONT=lat9w-16 >> /etc/vconsole.conf;
 
 # create root pw, user and user pw
 echo "root:$PASS" | chpasswd;
-useradd -mG wheel -s /bin/bash luca;
-echo "luca:$PASS" | chpasswd;
+useradd -mG wheel -s /bin/bash marcopasta;
+echo "marcopasta:$PASS" | chpasswd;
 
 # create init system / kernel & install grub
 mkinitcpio -p linux;
-# BIOS 
+# install grub for BIOS 
 pacman -S --noconfirm grub;
-# UEFI
-# pacman -S --noconfirm grub efibootmgr;
 
-# mkdir -p /boot/efi
 
 # install grub for BIOS 
 grub-install --recheck /dev/sda;
 sleep 4;
-# install grub for UEFI
-# grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable;
 
 
 # make config 
@@ -50,9 +45,9 @@ echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers;
 #intel-ucode ufw
 
 # install for T540p with Gnome
-pacman -S --noconfirm gnome gnome-extras gdm alacritty kitty git wget vim vlc flameshot \
+pacman -S --noconfirm gnome gnome-extra gdm alacritty kitty git wget vim vlc flameshot \
 vivaldi vivaldi-ffmpeg-codecs firefox chromium thunderbird libreoffice bitwarden neofetch redshift \
-i# ntel-ucode ufw
+intel-ucode ufw
 
 # install for workstation with Plasma
 # pacman -S --noconfirm alacritty kitty git wget vim okular vlc geeqie \
